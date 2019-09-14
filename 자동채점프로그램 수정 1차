@@ -1,0 +1,60 @@
+sumanswer = [] #여러 학생 데이터 합치려고
+sumwrong = []
+
+import csv
+s = open("생명과학실험.csv") 
+g = csv.reader(s)
+answer = [] 
+number = []
+score = [] 
+for raw in g :
+    answer.append(raw[1]) 
+    number.append(raw[0]) 
+    score.append(raw[2]) 
+s.close()
+
+f1 = open( "2604김소현.csv") 
+g1 = csv.reader(f1)
+stanswer = [] 
+for raw in g1 :
+    stanswer.append(raw[1]) 
+f1.close()
+scorerelust = []
+
+
+new = [] 
+for i in range(0,len(answer)) : 
+    n = answer[i].split('/') 
+    new.append(n) 
+문제수 = int(len(answer))
+맞은개수 = 문제수 - 틀린개수 #총 몇문제중에 몇문제 맞앗다고 나타낼거임
+틀린개수 = 0
+점수 = 0 
+오답 = [] 
+그림문제 = [] 
+for j in range(0, len(stanswer)) : 
+    txt = stanswer[j].upper() 
+    sc = float(score[j]) 
+    cp = True 
+    for i in range(len(new[j])) : 
+        ans = new[j][i].upper() 
+        if ans in txt :
+            cp = True
+            scoreresult.append(1)
+        if ans not in txt : 
+            cp = False 
+            오답.append(number[j]) 
+            틀린개수 += 1
+            scoreresult.append(0)
+            break 
+        if str(ans) == '그림생략' : 
+            n = number[j] 
+            그림문제.append(n) 
+    if cp : 
+        점수 += sc 
+
+print('채점 결과 : ',f1.name,'의',s.name,'과목의 총점은',점수,'점입니다')
+print('확인 사항 :',str(그림문제),'번은 그림을 그리는 문제이므로 시험지를 확인해주세요')
+print('틀린 문제 :',str(오답),'번 입니다')
+print('총',문제수, '개 소문제 중', 맞은개수,' 개 맞고,',틀린개수,'개 틀렸습니다')
+print(scoreresult) #scoreresult 리스트 만들어서 임의로 여러 학생 파일 만들어서 합계 낼거임 

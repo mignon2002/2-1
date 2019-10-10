@@ -14,8 +14,24 @@ s.close()
 
 import csv
 
-f1 = open( "2604김소현.csv") 
+f1 = open( "2604김소현.csv")
 g1 = csv.reader(f1) 
+
+서술형 = input()
+서술형채점기준개수 = int(input())
+서술형채점기준 = []
+서술형채점기준점수 = []
+for _ in range(서술형채점기준개수):
+    입력받은무언가 = input().split()
+    서술형채점기준.append(입력받은무언가[0])
+    서술형채점기준점수.append(int(입력받은무언가[1]))
+    
+서술형점수 = 0
+
+for 기준 in range(len(서술형채점기준)):
+    if 서술형채점기준[기준] in 서술형:
+        서술형점수 += 서술형채점기준점수[기준]
+
 stanswer = [] #학생의 리스트를 만들어준다
 
 for raw in g1 :
@@ -49,6 +65,6 @@ for j in range(0, len(stanswer)) :
     if cp :
         점수 += sc
 
-print('채점 결과 : ',f1.name,'의',s.name,'과목의 총점은',점수,'점입니다')
+print('채점 결과 : ',f1.name,'의',s.name,'과목의 총점은',점수+서술형점수,'점입니다')
 print('확인 사항 :',str(그림문제),'번은 그림을 그리는 문제이므로 시험지를 확인해주세요')
 print('틀린 문제 :',str(오답),'번 입니다')

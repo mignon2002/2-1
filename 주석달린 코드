@@ -52,3 +52,8 @@ for j in range(0, len(stanswer)) :
 print('채점 결과 : ',f1.name,'의',s.name,'과목의 총점은',점수,'점입니다')
 print('확인 사항 :',str(그림문제),'번은 그림을 그리는 문제이므로 시험지를 확인해주세요')
 print('틀린 문제 :',str(오답),'번 입니다')
+
+f = open('output2.csv', 'w', encoding='utf-8', newline='')
+wr = csv.writer(f)
+wr.writerow(['f1.name', '점수'])
+f.close()#출력된 점수를 csv파일로 저장한다
